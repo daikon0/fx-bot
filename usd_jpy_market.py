@@ -3,6 +3,9 @@ import os
 import json
 
 import requests
+from flask import Flask
+
+app = Flask(__name__)
 
 LINE_NOTIFY_TOKEN = os.environ.get('LINE_NOTIFY_TOKEN')
 
@@ -19,11 +22,16 @@ parameter = {
 
 }
 
-market_info = requests.post(SBI_BASE_URL, parameter).text.split()
-currency_pair = market_info[3]
-bid_price = float(market_info[4])
+@app.route("/")
+def hello():
+    market_info = requests.post(SBI_BASE_URL, parameter).text.split()
+    currency_pair = market_info[3]
+    bid_price = float(market_info[4])
+    if currency_pair == 'USDJPY':
+        print(currency_pair, bid_price)
+        message_data = {'message': f'\n USD-JPY: {bid_price:.3f}'}
+        requests.post(LINE_NOTIFY_URL, headers = LINE_NOTIFY_HEADERS, data = message_data)
+    return "success!!"
 
-if currency_pair == 'USDJPY':
-    print(currency_pair, bid_price)
-    message_data = {'message': f'\n USD-JPY: {bid_price:.3f}'}
-    requests.post(LINE_NOTIFY_URL, headers = LINE_NOTIFY_HEADERS, data = message_data)
+if __name__ == "__main__":
+    app.run(debug=True)
