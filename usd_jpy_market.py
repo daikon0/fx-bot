@@ -19,7 +19,6 @@ parameter = {
     'COUNT': 1,
     'DEVICE': 'PCWebFXAUTO',
     'GUID': '$2a$10$I/8SDPJdiyr3SlyS9h6N8eBLTKk4NN8ribqrTbYND.RpH.GzE4MMi'
-
 }
 
 @app.route("/")
@@ -34,4 +33,4 @@ def hello():
     return "success!!"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

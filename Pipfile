@@ -6,8 +6,12 @@ name = "pypi"
 [packages]
 requests = "*"
 flask = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.9"
+
+[scripts]
+start = "python usd_jpy_market.py"
