@@ -27,10 +27,9 @@ def hello():
     currency_pair = market_info[3]
     bid_price = float(market_info[4])
     if currency_pair == 'USDJPY':
-        print(currency_pair, bid_price)
         message_data = {'message': f'\n USD-JPY: {bid_price:.3f}'}
         requests.post(LINE_NOTIFY_URL, headers = LINE_NOTIFY_HEADERS, data = message_data)
-    return "success!!"
+    return "notification app!!"
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
