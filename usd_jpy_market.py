@@ -21,7 +21,7 @@ parameter = {
     'GUID': '$2a$10$I/8SDPJdiyr3SlyS9h6N8eBLTKk4NN8ribqrTbYND.RpH.GzE4MMi'
 }
 
-@app.route("/")
+@app.route("/usdjpy")
 def hello():
     market_info = requests.post(SBI_BASE_URL, parameter).text.split()
     currency_pair = market_info[3]
